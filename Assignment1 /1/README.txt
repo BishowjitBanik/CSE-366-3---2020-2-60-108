@@ -1,5 +1,6 @@
 # Assignment 1: Dynamic Robot Movement Simulation 
 Using Informed Search Strategies(A* Search)-----
+------------------------------------------------
 
 import numpy as np: Imports the numpy library and aliases it as np.
 
@@ -12,7 +13,7 @@ import random: Imports the random module, which provides functions for generatin
 
 
 class Environment:: Defines a class named Environment to represent the grid-based environment.
-
+----------------------------------------------------------------------------------------------
 def __init__(self, width=10, height=10, obstacle_density=0.2):: Defines the constructor method for the Environment class, which initializes the environment with default values for width, height, and obstacle density.
 
 self.width = width: Initializes the width of the environment.
@@ -27,8 +28,9 @@ self.end = (width - 1, height - 1): Initializes the end position of the agent in
 
 self.generate_obstacles(obstacle_density): Calls the generate_obstacles method to randomly generate obstacles in the environment based on the specified obstacle density.
 
-def generate_obstacles(self, density):: Defines a method to generate obstacles in the environment.
 
+def generate_obstacles(self, density):: Defines a method to generate obstacles in the environment.
+-------------------------------------------------------------------------------------------------
 num_obstacles = int(self.width * self.height * density): Calculates the number of obstacles based on the obstacle density.
 
 for _ in range(num_obstacles):: Iterates to generate obstacles.
@@ -57,6 +59,7 @@ return neighbors: Returns the list of neighboring cells.
 
 
 def a_star_search(env, start, goal):: Defines a function named a_star_search to perform A* search algorithm to find the shortest path from start to goal in the environment env.
+-------------------------------------------------------------------------------------------------------------------------
 
 frontier = PriorityQueue(): Creates an instance of the PriorityQueue class to store frontier nodes during A* search.
 
@@ -85,7 +88,7 @@ visited.add(current): Adds the current node to the set of visited nodes.
 
 
 The Agent class represents the robot agent that navigates through the environment:
-
+-----------------------------------------------------------------------------------
 __init__: Initializes the agent with the environment, start and end positions, and energy capacity.
 
 move: Moves the agent in the environment using the A* search algorithm, updating the position, energy, and path.
@@ -95,6 +98,33 @@ recharge: Recharges the agent's energy when it runs out.
 
 
 The visualize_environment function visualizes the grid environment, including the agent's position, start and end positions, and obstacles using matplotlib.
-
+--------------------------------------------------------------------------------------------------------------------------------
 
 The simulate function runs the simulation, where the agent navigates the environment until it reaches the goal position.
+
+
+
+
+
+
+
+Using Informed Search Strategies(A* Search)-----
+------------------------------------------------
+All function are almost same
+
+uniform_cost_search function implements the Uniform Cost Search algorithm to find the shortest path from a start node to a goal node in a grid-based environment.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+visited: A set to keep track of visited nodes.
+queue: A priority queue (heap) to store nodes prioritized by their path cost. Each element in the queue is a tuple (cost, current_node, path), where cost is the total cost to reach the current_node from the start node, and path is the path taken to reach the current_node.
+The initial element in the queue is (0, start, []), indicating that the cost to reach the start node is 0, and the path taken so far is empty.
+The loop continues until the queue is empty, meaning there are no more nodes to explore.
+In each iteration, the node with the lowest cost is dequeued from the queue. This node represents the current node being explored.
+If the current node is the goal node, the function returns the path to reach the goal node (path + [current]), indicating that a path from the start to the goal has been found.
+If the current node has already been visited, it's skipped to avoid revisiting nodes unnecessarily.
+If the current node has not been visited:
+It's added to the set of visited nodes.
+For each neighboring node of the current node, a new cost is calculated by adding 1 to the current cost (assuming uniform cost for each move).
+A tuple (new_cost, neighbor, path + [current]) is pushed onto the queue, representing the updated cost, the neighboring node, and the path taken to reach it.
+
+
